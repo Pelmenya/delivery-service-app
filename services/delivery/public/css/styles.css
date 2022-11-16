@@ -1,0 +1,21 @@
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #e5eaf1;
+    border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #0d6efd;
+    border-radius: 6px;
+}
+
+@media only screen and (max-width: 500px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}
