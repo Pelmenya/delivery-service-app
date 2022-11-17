@@ -1,29 +1,27 @@
 import { NextFunction, Request, Response } from 'express';
-import { Users } from '../models/users';
-import { ROUTES } from '../utils/constants/routes';
+import { UserModule } from '../models/users';
+import { IUser } from '../types/i-user';
 
-const { NOT_FOUND_404 } = ROUTES;
 
 export const signUpUser = (req: Request, res: Response, next: NextFunction) => {
     const handler = async () => {
-        const { username, email, password } = req.body;
-
-        const newUser = new Users({ username, email, password });
-        try {
-            if (newUser) {
-                await newUser.save();
-                next();
-            } else {
-                res.status(404);
-                res.redirect(NOT_FOUND_404);
-            }
-        } catch (e) {
-            res.status(500).json(e);
-        }
-
+        const { name, email, password, contactPhone } = req.body;
+        const user = { name, email, password, contactPhone } as IUser;
+        const newUser = await UserModule.create(user);
+      
+        res.status(201);
+        res.json({
+            data: {
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                contactPhone: newUser.contactPhone,
+            },
+            status: 'ok',
+        });
     };
 
-    handler().catch(err => console.log(err));
+    handler().catch(next);
 };
 
 export const logoutUser = (req: Request, res: Response) => {

@@ -8,6 +8,7 @@ import { apiRouter } from './routers/api-router/api-router';
 import { unionFilesFormDataLoader } from './middlewares/union-files-form-data-loader';
 import { methodOverride } from './middlewares/method-override';
 import { passport } from './middlewares/passport';
+import { errors } from './middlewares/errors';
 
 const { SECRET =  'SECRET' } = process.env;
 
@@ -34,6 +35,6 @@ app.use('/public', express.static(__dirname + '../..' + '/public'));
 
 app.use(apiRouter);
 
-app.use(notFound404);
+app.use(errors);
 
 export { app };

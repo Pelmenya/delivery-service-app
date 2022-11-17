@@ -19,7 +19,7 @@ const verify: VerifyFunction = (username, password, done) => {
                 if (!user) {
                     return done(null, false);
                 }
-                if (user.password === password) {
+                if (user.passwordHash === password) {
                     return done(null, user);
                 } 
                 return  done(new Error('Password or login is not correct'));

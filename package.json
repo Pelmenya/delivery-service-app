@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/Pelmenya/delivery-service-app#readme",
   "devDependencies": {
-    "@types/ejs": "3.1.1",
+    "@types/bcrypt": "5.0.0",
     "@types/express": "4.17.14",
     "@types/express-session": "^1.17.5",
     "@types/method-override": "0.0.32",

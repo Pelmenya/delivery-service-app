@@ -1,11 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { ROUTES } from '../utils/constants/routes';
-
-const { API, USER, LOGIN } = ROUTES;
+import { ERRORS } from '../utils/constants/errors';
 
 export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     if (!req.isAuthenticated()) {
-        res.redirect(`${API}${USER}${LOGIN}`);
+        throw new Error(ERRORS.NEED_TO_AUTH);
     }
     next();
 };

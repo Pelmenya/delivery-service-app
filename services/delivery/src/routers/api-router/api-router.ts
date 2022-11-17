@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { ROUTES } from '../../utils/constants/routes';
+import { ROUTES } from './routes';
+import { authRouter } from './auth-router';
 
 const { API } = ROUTES;
 
 
 const apiRouter = Router();
 
-apiRouter.use(API, (req, res) => res.json('ddd') );
+apiRouter.use(API, authRouter);
 
 export { apiRouter };
