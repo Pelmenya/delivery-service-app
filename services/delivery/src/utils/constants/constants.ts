@@ -1,6 +1,6 @@
-export const notFound404Text = '404 | Страница не найдена';
+export const notFound404Text = '404 | Not found route';
 
-export const publicBooksFilesDir = 'public/books';
+export const publicFilesDir = 'public/books';
 
 export const logsDir = 'logs';
 

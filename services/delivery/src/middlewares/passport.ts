@@ -1,29 +1,31 @@
-import { Users } from '../models/users';
+import { UserModule, Users } from '../models/users';
+import bcrypt from 'bcrypt';
 import passport from 'passport';
 
 import { Strategy as LocalStrategy, VerifyFunction } from 'passport-local';
 import { IUser } from '../types/i-user';
 
 const options = {
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password',
 };
 
-const verify: VerifyFunction = (username, password, done) => {
+const verify: VerifyFunction = (email, password, done) => {
     const handler = async () => {
-        await Users.findOne({ username },
-            (err: Error, user: IUser) => {
-                if (err) {
-                    return done(err);
-                }
-                if (!user) {
-                    return done(null, false);
-                }
-                if (user.passwordHash === password) {
-                    return done(null, user);
-                } 
-                return  done(new Error('Password or login is not correct'));
-            }).clone();
+        await UserModule.findByEmail(email, (err: Error, user: IUser) => {
+            console.log(err);
+            console.log(user);
+            if (err) {
+                return done(err);
+            }
+            if (!user) {
+                return done(null, false);
+            }
+            if (bcrypt.compareSync(password, user.passwordHash)) {
+                return done(null, user);
+            }
+            return done(new Error('Password or login is not correct'));
+        });
 
     };
     handler().catch(err => console.log(err));

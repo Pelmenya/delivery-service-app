@@ -37,4 +37,6 @@ app.use(apiRouter);
 
 app.use(errors);
 
+app.use(notFound404);
+
 export { app };
