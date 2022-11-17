@@ -1,4 +1,4 @@
-import { logoutUser, signUpUser } from '../../controllers/user-controller';
+import { logoutUser, signInUser, signUpUser } from '../../controllers/user-controller';
 import { passportAuthenticate } from '../../middlewares/passport-authenticate';
 import { Router } from 'express';
 import { ROUTES } from './routes';
@@ -10,11 +10,7 @@ const authRouter = Router();
 
 authRouter.post(`${SIGNUP}`, signUpUser);
 
-authRouter.post(`${SIGNIN}`, passportAuthenticate, (req, res) => {
-    const { user } = req;
-    res.status(200);
-    res.json(user);
-});
+authRouter.post(`${SIGNIN}`, passportAuthenticate, signInUser);
 
 authRouter.post(`${LOGOUT}`, isAuthenticated, logoutUser);
 

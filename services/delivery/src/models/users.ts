@@ -27,15 +27,6 @@ const userSchema = new Schema({
     },
 });
 
-
-
-
-userSchema.statics.findByEmail = function (email: string) {
-    const user: IUser = this.find({ email });
-    return user;
-};
-
-
 export const Users = model('Users', userSchema);
 
 const UserModule = {

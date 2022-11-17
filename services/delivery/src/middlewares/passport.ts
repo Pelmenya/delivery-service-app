@@ -4,6 +4,8 @@ import passport from 'passport';
 
 import { Strategy as LocalStrategy, VerifyFunction } from 'passport-local';
 import { IUser } from '../types/i-user';
+import { ERRORS } from '../utils/constants/errors';
+import { UnauthorizedError } from '../utils/errors-classes/unathorized-error';
 
 const options = {
     usernameField: 'email',
@@ -13,20 +15,17 @@ const options = {
 const verify: VerifyFunction = (email, password, done) => {
     const handler = async () => {
         await UserModule.findByEmail(email, (err: Error, user: IUser) => {
-            console.log(err);
-            console.log(user);
             if (err) {
                 return done(err);
             }
             if (!user) {
-                return done(null, false);
+                return done(new UnauthorizedError(ERRORS.INCORRECT_EMAIL_OR_PASSWORD), false);
             }
             if (bcrypt.compareSync(password, user.passwordHash)) {
                 return done(null, user);
             }
-            return done(new Error('Password or login is not correct'));
+            return done(new UnauthorizedError(ERRORS.INCORRECT_EMAIL_OR_PASSWORD));
         });
-
     };
     handler().catch(err => console.log(err));
 };

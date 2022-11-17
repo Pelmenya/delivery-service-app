@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserModule } from '../models/users';
+import { IUser } from '../types/i-user';
 import { TSignUpUser } from '../types/t-sign-up-user';
+import { ERRORS } from '../utils/constants/errors';
+import { NotFoundError } from '../utils/errors-classes/not-found-error';
 
 export const signUpUser = (req: Request, res: Response, next: NextFunction) => {
     const handler = async () => {
@@ -22,28 +25,26 @@ export const signUpUser = (req: Request, res: Response, next: NextFunction) => {
     handler().catch(next);
 };
 
-/* export const signInUser = (req: Request, res: Response, next: NextFunction) => {
-    const handler = async () => {
-        const { user } = req;
-        const user: TSignInUser = { email, password };
-        const newUser = await UserModule.findByEmail(user);
+export const signInUser = (req: Request, res: Response, next: NextFunction) => {
+    const  user = req.user as IUser;
+    if (user) {
         res.status(200);
         res.json({
             data: {
-                id: newUser._id,
-                name: newUser.name,
-                email: newUser.email,
-                contactPhone: newUser.contactPhone,
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                contactPhone: user.contactPhone,
             },
             status: 'ok',
         });
-    };
+    } else {
+        next(new NotFoundError(ERRORS.NOT_EXIST_USER));
+    }
+};
 
-    handler().catch(next);
-}; */
-
-export const logoutUser = (req: Request, res: Response, next: NextFunction) => {
-    req.logout(next);
+export const logoutUser = (req: Request, res: Response) => {
+    req.logout((err) => console.log(err));
     res.status(200);
     res.json({ status: 'ok', data: null });
 };
