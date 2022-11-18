@@ -1,8 +1,7 @@
-export interface IAdvertisement {
+import { IAdvertisementData } from './i-advertiment-data';
+
+export interface IAdvertisement extends IAdvertisementData {
     _id: string;
-    shortText: string;
-    description?: string
-    images?: string[];
     userId: string;
     createAt: Date;
     updateAt: Date;

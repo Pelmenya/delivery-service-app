@@ -2,8 +2,6 @@ import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { IUser } from '../types/i-user';
 import { TSignUpUser } from '../types/t-sign-up-user';
-import { ERRORS } from '../utils/constants/errors';
-import { UnauthorizedError } from '../utils/errors-classes/unathorized-error';
 
 const userSchema = new Schema({
     name: {
@@ -29,7 +27,7 @@ const userSchema = new Schema({
 
 export const Users = model('Users', userSchema);
 
-const UserModule = {
+export const UserModule = {
     create: async function (signUpData: TSignUpUser) {
         const { password } = signUpData;
         const hash = await bcrypt.hash(password, 10);
@@ -42,5 +40,3 @@ const UserModule = {
         return user;
     },  
 };
-
-export { UserModule };

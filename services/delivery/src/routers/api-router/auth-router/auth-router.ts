@@ -1,8 +1,8 @@
-import { logoutUser, signInUser, signUpUser } from '../../controllers/user-controller';
-import { passportAuthenticate } from '../../middlewares/passport-authenticate';
+import { logoutUser, signInUser, signUpUser } from '../../../controllers/user-controller';
+import { passportAuthenticate } from '../../../middlewares/passport-authenticate';
 import { Router } from 'express';
-import { ROUTES } from './routes';
-import { isAuthenticated } from '../../middlewares/is-authenticate';
+import { ROUTES } from '../routes';
+import { isAuthenticated } from '../../../middlewares/is-authenticate';
 
 const { SIGNIN, SIGNUP, LOGOUT } = ROUTES;
 

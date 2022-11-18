@@ -9,6 +9,6 @@ export const ERRORS = {
     INVALID_ID: 'Некорректный id объекта запроса',
     INCORRECT_URL: 'Неправильный формат URL',
     INCORRECT_EMAIL: 'Неправильный формат e-mail',
-    INCORRECT_EMAIL_OR_PASSWORD: 'Неправильные почта или пароль',
+    INCORRECT_EMAIL_OR_PASSWORD: 'Неверный логин или пароль',
     DUPLICATE_KEY: 'Пользователь с таким email уже зарегистрирован',
 };

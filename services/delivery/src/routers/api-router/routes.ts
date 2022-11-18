@@ -5,9 +5,13 @@ const AUTH_ROUTES = {
     LOGOUT: '/logout',
 };
 
+const ADVERTISEMENTS_ROUTES = {
+    ADVERTISEMENTS: '/advertisements',
+};
 
 export const ROUTES = {
     API: '/api',
     ID: '/:id',
     ...AUTH_ROUTES,
+    ...ADVERTISEMENTS_ROUTES,
 };

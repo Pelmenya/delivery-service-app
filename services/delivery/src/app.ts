@@ -9,6 +9,7 @@ import { unionFilesFormDataLoader } from './middlewares/union-files-form-data-lo
 import { methodOverride } from './middlewares/method-override';
 import { passport } from './middlewares/passport';
 import { errors } from './middlewares/errors';
+import { isAuthenticated } from './middlewares/is-authenticate';
 
 const { SECRET =  'SECRET' } = process.env;
 
@@ -19,17 +20,18 @@ app.use(express.json());
 // query-parser
 app.use(express.urlencoded({ extended: true }));
 // хранилище файлов, заодно парсим data из form-data в req.body
-app.use(unionFilesFormDataLoader);
-// подменяем метод запроса из html формы, если надо, т.к. при submit только post и get
-app.use(methodOverride);
-
 app.use(logger);
-
+// 
 app.use(session({ secret: SECRET }));
 
 app.use(passport.initialize());
 
 app.use(passport.session());
+
+app.use(unionFilesFormDataLoader);
+// подменяем метод запроса из html формы, если надо, т.к. при submit только post и get
+app.use(methodOverride);
+
 
 app.use('/public', express.static(__dirname + '../..' + '/public'));
 

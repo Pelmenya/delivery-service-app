@@ -1,6 +1,6 @@
 export const notFound404Text = '404 | Not found route';
 
-export const publicFilesDir = 'public/books';
+export const publicFilesDir = 'public/uploads';
 
 export const logsDir = 'logs';
 
