@@ -25,7 +25,7 @@ export const signUpUser = (req: Request, res: Response, next: NextFunction) => {
     handler().catch(next);
 };
 
-export const signInUser = (req: Request, res: Response, next: NextFunction) => {
+export const signInUser = (req: Request, res: Response) => {
     const  user = req.user as IUser;
     if (user) {
         res.status(200);
@@ -39,7 +39,7 @@ export const signInUser = (req: Request, res: Response, next: NextFunction) => {
             status: 'ok',
         });
     } else {
-        next(new NotFoundError(ERRORS.NOT_EXIST_USER));
+        throw new NotFoundError(ERRORS.NOT_EXIST_USER);
     }
 };
 
