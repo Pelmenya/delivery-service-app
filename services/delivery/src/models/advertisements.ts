@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
-import { IAdvertisementData } from '../types/i-advertiment-data';
+import { IAdvertisementData } from '../types/i-advertisement-data';
+import { TQueryAdvertisementsParams } from '../types/t-query-advertisements-params';
 
 /* 
     Название	Тип	        Обязательное	Уникальное
@@ -59,10 +60,49 @@ export const AdvertisementModule = {
         const date = new Date();
         const [createAt, updateAt] = [date, date];
         console.log(advertisementData);
+        const { tags } = advertisementData;
+        let tagsArray: (string | undefined)[] | undefined;
+        if (tags) {
+            tagsArray = tags.split(',');
+            tagsArray = tagsArray.map(word => { 
+                if (word) return word.trim();
+                return;            
+            });
+        }
+        
         const newAdvertisement = await Advertisements.create({ 
-            ...advertisementData, createAt, updateAt, isDeleted: false,
+            ...advertisementData, createAt, updateAt, isDeleted: false, tags: tagsArray,
         });
         return newAdvertisement;
     },
+ 
+    find: async function (params:TQueryAdvertisementsParams) {
+        const { shortText, description, tags, userId } = params;
+        const queryParams: TQueryAdvertisementsParams = {};
+        if (shortText) {
+            queryParams.shortText = { $regex : shortText } as { '$regex': string  };
+        }
+        if (description) {
+            queryParams.description = { $regex: description } as { '$regex': string  };
+        }
+        if (userId) {
+            queryParams.userId = { $eq: userId } as { '$eq': string  };
+        }
+        if (tags && typeof tags === 'string') {
+            let tagsArray: (string | undefined)[] | undefined;
+            tagsArray = tags.split(',');
+            tagsArray = tagsArray.map(word => { 
+                if (word) return word.trim();
+                return;            
+            });
+            queryParams.tags = { $all : tagsArray } as { $all: string[] };
+        }
+
+        queryParams.isDeleted = false;
+
+        const advertisements = await Advertisements.find({ ...queryParams });
+        return advertisements;
+    },
 
 };
+

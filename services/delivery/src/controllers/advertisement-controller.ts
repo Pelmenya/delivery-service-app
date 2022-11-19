@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { AdvertisementModule } from '../models/advertisements';
-import { IAdvertisementData } from '../types/i-advertiment-data';
+import { IAdvertisementData } from '../types/i-advertisement-data';
 import { IUser } from '../types/i-user';
+import { TQueryAdvertisementsParams } from '../types/t-query-advertisements-params';
 import { publicFilesDir } from '../utils/constants/constants';
 
 export const createAdvertisement = (req: Request, res: Response, next: NextFunction) => {
@@ -31,6 +32,7 @@ export const createAdvertisement = (req: Request, res: Response, next: NextFunct
                 shortText: newAdvertisement.shortText,
                 description: newAdvertisement.description,
                 images: newAdvertisement.images,
+                tags: newAdvertisement.tags,
                 user: { 
                     id: user._id,
                     name: user.name,
@@ -39,6 +41,20 @@ export const createAdvertisement = (req: Request, res: Response, next: NextFunct
             },
             status: 'ok',
         });
+    };
+
+    handler().catch(next);
+};
+
+export const getAdvertisements = (req: Request, res: Response, next: NextFunction ) => {
+    const handler = async () => {
+        const params = req.query as TQueryAdvertisementsParams;
+
+        const advertisements = await AdvertisementModule.find(params);
+        
+        res.status(200);
+        res.json(advertisements);
+
     };
 
     handler().catch(next);

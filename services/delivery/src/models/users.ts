@@ -3,6 +3,15 @@ import bcrypt from 'bcrypt';
 import { IUser } from '../types/i-user';
 import { TSignUpUser } from '../types/t-sign-up-user';
 
+/* 
+    Название	    Тип	        Обязательное	Уникальное
+    _id	            ObjectId	да	            да
+    email	        string	    да	            да
+    passwordHash	string	    да	            нет
+    name	        string	    да	            нет
+    contactPhone	string	    нет	            нет
+*/
+
 const userSchema = new Schema({
     name: {
         type: String,
