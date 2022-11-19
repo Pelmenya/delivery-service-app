@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, ObjectId } from 'mongoose';
 import { IAdvertisementData } from '../types/i-advertisement-data';
 import { TQueryAdvertisementsParams } from '../types/t-query-advertisements-params';
 
@@ -104,5 +104,9 @@ export const AdvertisementModule = {
         return advertisements;
     },
 
+    remove: async function (id: ObjectId | string ) {
+        const advertisement = await Advertisements.findByIdAndUpdate({ _id: String(id) }, { isDeleted: true });
+        return advertisement;
+    },
 };
 
