@@ -9,7 +9,6 @@ import { unionFilesFormDataLoader } from './middlewares/union-files-form-data-lo
 import { methodOverride } from './middlewares/method-override';
 import { passport } from './middlewares/passport';
 import { errors } from './middlewares/errors';
-import { isAuthenticated } from './middlewares/is-authenticate';
 
 const { SECRET =  'SECRET' } = process.env;
 
@@ -31,7 +30,6 @@ app.use(passport.session());
 app.use(unionFilesFormDataLoader);
 // подменяем метод запроса из html формы, если надо, т.к. при submit только post и get
 app.use(methodOverride);
-
 
 app.use('/public', express.static(__dirname + '../..' + '/public'));
 
