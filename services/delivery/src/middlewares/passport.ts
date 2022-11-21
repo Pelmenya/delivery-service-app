@@ -49,5 +49,9 @@ passport.deserializeUser((_id, done) => {
     handler().catch(err => console.log(err));
 });
 
+export const passportInitialize = passport.initialize();
+
+export const passportSession = passport.session();
+
 
 export { passport };

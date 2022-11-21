@@ -13,17 +13,17 @@ readAt	    Date	    нет	            нет
 export const Message = {
     author: {
         type: Schema.Types.ObjectId,
-        requred: true,
+        required: true,
     },
 
     sentAt: {
         type: Date,
-        requred: true,
+        required: true,
     },
 
     text: {
         type: String,
-        requred: true,
+        required: true,
     },
     
     readAt: {

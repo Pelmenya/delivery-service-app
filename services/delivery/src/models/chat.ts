@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { IMessage } from '../types/i-message';
-import { Message, messageShema } from './message';
+import { Message } from './message';
  
 
 /* 
@@ -14,12 +13,12 @@ messages	Message[]	            нет	            нет
 const chatSchema = new Schema({
     users: {
         type: [Schema.Types.ObjectId, Schema.Types.ObjectId],
-        requred: true,
+        required: true,
     },
     
     createAt: {
         type: Date,
-        requred: true,
+        required: true,
     },
 
     messages: {

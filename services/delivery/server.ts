@@ -1,5 +1,6 @@
-import { app } from './src/app';
 import mongoose from 'mongoose';
+import { httpServer } from './src/socket.io/socket.io';
+
 
 const {
     PORT = 3000,
@@ -18,7 +19,7 @@ const start = async () => {
         });
         console.log(`Connection: ${MONGODB_BOOKS_URL}`);
         console.log(`DB name: ${DB_NAME}`);
-        app.listen(Number(PORT), () => {
+        httpServer.listen(Number(PORT), () => {
             console.log(`listening on port ${PORT}! (in folder ${__dirname})`);
         });
     } catch (e) {

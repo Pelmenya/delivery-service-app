@@ -29,7 +29,9 @@ export const signInUser = (req: Request, res: Response) => {
     const  user = req.user as IUser;
     if (user) {
         res.status(200);
-        res.json({
+        res.redirect('/');
+
+    /*      res.json({
             data: {
                 id: user._id,
                 name: user.name,
@@ -38,7 +40,7 @@ export const signInUser = (req: Request, res: Response) => {
             },
             status: 'ok',
         });
-    } else {
+ */    } else {
         throw new NotFoundError(ERRORS.NOT_EXIST_USER);
     }
 };
