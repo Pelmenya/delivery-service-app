@@ -34,3 +34,5 @@ export const Message = {
 export const messageShema = new Schema({
     ...Message,    
 });
+
+export const Messages = model('Messages', messageShema);

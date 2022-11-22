@@ -53,9 +53,8 @@
                         id="text"
                 ></textarea>
             </div>
-            <button type="submit" id="send-all" class="btn btn-primary">all</button>
-            <button type="button" id="send-me" class="btn btn-primary">me</button>
-            <button type="button" id="send-room" class="btn btn-primary">room</button>
+            <button type="submit" id="send-all" class="btn btn-primary mt-5">Login</button>
+            <button type="button" id="send-me" class="btn btn-primary mt-5">Send Message</button>
         </form>
     </div>
 
@@ -68,58 +67,38 @@
     const boxList       = document.querySelector('#list');
     const inputUsername = document.querySelector('#username');
     const inputText     = document.querySelector('#text');
-    const sendAll       = document.querySelector('#send-all');
-    const sendMe        = document.querySelector('#send-me');
-    const sendRoom      = document.querySelector('#send-room');
+    const send        = document.querySelector('#send-me');
 
-    const getTmp = (msg) => {
+    const getTmp = (data) => {
+        console.log(data);
+        const  { message, chatId } = data;
+        const  { author, sentAt, text } = message;
         return `
                 <div class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
-                        <small>${msg.username}</small>
-                        <small class="text-muted">${msg.type}</small>
+                        <small>${author}</small>
+                        <small class="text-muted">${sentAt}</small>
                     </div>
-                    <p class="mb-1">${msg.text}</p>
+                    <div class="d-flex w-100 justify-content-between">
+                        <small>${chatId}</small>
+                    </div>
+                    <p class="mb-1">${text}</p>
                 </div>
         `;
     };
 
-    socket.on('message-to-me', (msg) => {
+    socket.on('newMessage', (msg) => {
         const div = getTmp(msg)
         boxList.insertAdjacentHTML('beforeend', div)
     });
 
-    sendMe.addEventListener('click', () => {
-        socket.emit('message-to-me', {
-            username: inputUsername.value,
+    send.addEventListener('click', () => {
+        socket.emit('sendMessage', {
+            receiver: inputUsername.value,
             text: inputText.value,
         })
     })
 
-    socket.on('message-to-all', (msg) => {
-        const div = getTmp(msg)
-        boxList.insertAdjacentHTML('beforeend', div)
-    });
-
-    sendAll.addEventListener('click', () => {
-        socket.emit('message-to-all', {
-            username: inputUsername.value,
-            text: inputText.value,
-        })
-    })
-
-
-    socket.on('message-to-room', (msg) => {
-        const div = getTmp(msg)
-        boxList.insertAdjacentHTML('beforeend', div)
-    });
-
-    sendRoom.addEventListener('click', () => {
-        socket.emit('message-to-room', {
-            username: inputUsername.value,
-            text: inputText.value,
-        })
-    })
 
 
 </script>

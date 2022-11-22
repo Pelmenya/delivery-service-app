@@ -8,6 +8,9 @@ import { passportInitialize, passportSession } from '../middlewares/passport';
 import { UnauthorizedError } from '../utils/errors-classes/unathorized-error';
 import { ERRORS } from '../utils/constants/errors';
 import { IUser } from '../types/i-user';
+import { Chat, chatEmiter } from '../models/chat';
+import { TSendMessageData } from '../types/t-send-message-data';
+import { IMessage } from '../types/i-message';
 
 const httpServer = http.createServer(app);
 
@@ -32,7 +35,7 @@ io.use((socket, next) => {
 
 io.use((socket, next) => {
     const { user } = socket.request as Request & { user: IUser };
-    console.log(user);
+
     if (user) {
         next();
     } else {
@@ -43,22 +46,16 @@ io.use((socket, next) => {
 
 io.on('connection', (socket) => {
     const { id } = socket;
-    const { session } = socket.request as Request;
+    const { user } = socket.request as Request & { user: IUser };
 
-    console.log(session);
     console.log(`Socket connected: ${id}`);
 
-    // сообщение себе
-    socket.on('message-to-me', (msg) => {
-        console.log(msg);
-        socket.emit('message-to-me', msg);
+    socket.on('sendMessage', (msg: TSendMessageData) => {
+        chatEmiter.emit('sendMessage', { ...msg, author: String(user._id) });
     });
 
-    // сообщение для всех
-    socket.on('message-to-all', (msg) => {
-        socket.broadcast.emit('message-to-all', msg);
-        socket.emit('message-to-all', msg);
-        console.log(msg);
+    Chat.subscribe((data) => {
+        socket.emit('newMessage', data);
     });
 
     socket.on('disconnect', () => {

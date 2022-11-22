@@ -59,7 +59,6 @@ export const AdvertisementModule = {
     create: async function (advertisementData: IAdvertisementData & { userId: string }) {
         const date = new Date();
         const [createAt, updateAt] = [date, date];
-        console.log(advertisementData);
         const { tags } = advertisementData;
         let tagsArray: (string | undefined)[] | undefined;
         if (tags) {
