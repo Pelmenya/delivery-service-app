@@ -2,7 +2,6 @@ import { EventEmitter } from 'node:events';
 import { Schema, model } from 'mongoose';
 import { Message, Messages } from './message';
 import { TSendMessageData } from '../types/t-send-message-data';
-import e from 'express';
 
 class ChatEmiter extends EventEmitter { }
 export const chatEmiter = new ChatEmiter();

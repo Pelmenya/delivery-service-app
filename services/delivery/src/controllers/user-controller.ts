@@ -22,6 +22,7 @@ export const signUpUser = (req: Request, res: Response, next: NextFunction) => {
         });
     };
 
+    // eslint-disable-next-line promise/no-callback-in-promise
     handler().catch(next);
 };
 

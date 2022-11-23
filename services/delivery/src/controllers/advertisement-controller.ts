@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable promise/no-callback-in-promise */
 import { NextFunction, Request, Response } from 'express';
 import { AdvertisementModule, Advertisements } from '../models/advertisements';
 import { IAdvertisementData } from '../types/i-advertisement-data';
