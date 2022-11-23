@@ -57,13 +57,17 @@ io.on('connection', (socket) => {
         socket.emit('newMessage', data);
     });
 
-    socket.on('getHistory', (chatId : string) => {
+    socket.on('getHistory', (recieverId : string) => {
         const handler = async () => {
-            const messages = await Chat.getHistory(chatId);
-            socket.emit('chatHistory', messages);
+            const chat = await Chat.find([recieverId, user._id ]);
+            console.log(chat);
+            if (chat) {
+                const messages = await Chat.getHistory(String(chat._id));
+                socket.emit('chatHistory', messages);
+            } else socket.emit('chatHistory', chat);
         };
 
-        handler().catch(err => console.log(err));
+        handler().catch(err =>  socket.emit('chatHistory', err));
     });
 
     socket.on('disconnect', () => {

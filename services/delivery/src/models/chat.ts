@@ -76,7 +76,8 @@ export const Chat = {
                 const message = await Chat.sendMessage(data);
                 cb(message);
             };
-            handler().catch(err => console.log(err));
+            // eslint-disable-next-line promise/no-callback-in-promise
+            handler().catch(err => cb(err));
         });
     },
 
