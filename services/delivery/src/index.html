@@ -55,6 +55,7 @@
             </div>
             <button type="submit" id="send-all" class="btn btn-primary mt-5">Login</button>
             <button type="button" id="send-me" class="btn btn-primary mt-5">Send Message</button>
+            <button type="button" id="get-history" class="btn btn-primary mt-5">getHistory</button>
         </form>
     </div>
 
@@ -67,7 +68,8 @@
     const boxList       = document.querySelector('#list');
     const inputUsername = document.querySelector('#username');
     const inputText     = document.querySelector('#text');
-    const send        = document.querySelector('#send-me');
+    const send          = document.querySelector('#send-me');
+    const getHistory    = document.querySelector('#get-history');
 
     const getTmp = (data) => {
         console.log(data);
@@ -92,6 +94,10 @@
         boxList.insertAdjacentHTML('beforeend', div)
     });
 
+    socket.on('chatHistory', (msg) => {
+        console.log(msg)
+    });
+
     send.addEventListener('click', () => {
         socket.emit('sendMessage', {
             receiver: inputUsername.value,
@@ -99,6 +105,9 @@
         })
     })
 
+    getHistory.addEventListener('click', () => {
+        socket.emit('getHistory', inputUsername.value);
+    })
 
 
 </script>

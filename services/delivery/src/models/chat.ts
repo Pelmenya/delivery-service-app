@@ -79,4 +79,15 @@ export const Chat = {
             handler().catch(err => console.log(err));
         });
     },
+
+    getHistory: async function (chatId : string ) {
+        const chat = await Chats.findById(chatId);
+        
+        if (chat) {
+            const { messages } = chat;
+            return [...messages];
+        }
+        
+        return chat;
+    },
 };

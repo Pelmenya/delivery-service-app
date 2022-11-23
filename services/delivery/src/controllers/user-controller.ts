@@ -26,21 +26,23 @@ export const signUpUser = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const signInUser = (req: Request, res: Response) => {
-    const  user = req.user as IUser;
+    const user = req.user as IUser;
     if (user) {
         res.status(200);
-        res.redirect('/');
-
-    /*      res.json({
-            data: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                contactPhone: user.contactPhone,
-            },
-            status: 'ok',
-        });
- */    } else {
+        if (process.env.NODE_ENV && process.env.NODE_ENV === 'dev') {
+            res.redirect('/');
+        } else {
+            res.json({
+                data: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    contactPhone: user.contactPhone,
+                },
+                status: 'ok',
+            });
+        }
+    } else {
         throw new NotFoundError(ERRORS.NOT_EXIST_USER);
     }
 };

@@ -10,7 +10,6 @@ import { ERRORS } from '../utils/constants/errors';
 import { IUser } from '../types/i-user';
 import { Chat, chatEmiter } from '../models/chat';
 import { TSendMessageData } from '../types/t-send-message-data';
-import { IMessage } from '../types/i-message';
 
 const httpServer = http.createServer(app);
 
@@ -56,6 +55,15 @@ io.on('connection', (socket) => {
 
     Chat.subscribe((data) => {
         socket.emit('newMessage', data);
+    });
+
+    socket.on('getHistory', (chatId : string) => {
+        const handler = async () => {
+            const messages = await Chat.getHistory(chatId);
+            socket.emit('chatHistory', messages);
+        };
+
+        handler().catch(err => console.log(err));
     });
 
     socket.on('disconnect', () => {

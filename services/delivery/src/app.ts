@@ -31,9 +31,11 @@ app.use(methodOverride);
 
 app.use('/public', express.static(__dirname + '../..' + '/public'));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'dev') { 
+    app.get('/', (req, res) => {
+        res.sendFile(__dirname + '/index.html');
+    });
+}
 
 app.use(apiRouter);
 
