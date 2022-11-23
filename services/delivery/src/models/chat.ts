@@ -69,6 +69,7 @@ export const Chat = {
         }
     },
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     subscribe: function (cb: (data: any) => void) {
         chatEmiter.on('sendMessage', (data: TSendMessageData) => {
             const handler = async () => {

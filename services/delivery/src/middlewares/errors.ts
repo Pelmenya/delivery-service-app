@@ -7,6 +7,7 @@ type TError = {
 };
 
 // нужна next функция, иначе генерит ошибку сервера по отправке заголовков
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const errors = (err: TError, req: Request, res: Response, next: NextFunction) => {
     const { statusCode, message } = err;
     const ERROR = 'error';
