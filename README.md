@@ -463,6 +463,7 @@ const messages = await Chat.getHistory(id);
 - `docker-compose.dev.yml` для разработки проекта
 - `README.md` с описанием проекта и вариантами его запуска.
 - `commands.md` полезные команды
+
 Список переменных окружения описан в файле `.env-example`. 
 
 Для запуска приложения используется скрипт `npm start`, описанный в `package.json`.
