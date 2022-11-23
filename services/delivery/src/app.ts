@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 
 import { logger } from './middlewares/logger';
 import { notFound404 } from './middlewares/not-found-404';
@@ -33,7 +34,7 @@ app.use('/public', express.static(__dirname + '../..' + '/public'));
 
 if (process.env.NODE_ENV && process.env.NODE_ENV === 'dev') { 
     app.get('/', (req, res) => {
-        res.sendFile(__dirname + '/index.html');
+        res.sendFile(path.resolve(__dirname + '../../public/static' + '/index.html'));
     });
 }
 
