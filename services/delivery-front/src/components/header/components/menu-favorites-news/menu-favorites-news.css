@@ -1,0 +1,23 @@
+.menu-favorites-news__item {
+    max-width: 288px;
+    width: 288px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 13px;
+    height: 13px;
+    padding-left: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.menu-favorites-news__img {
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+

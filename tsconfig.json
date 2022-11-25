@@ -24,14 +24,17 @@
         // Specify library files to be included in the compilation.
         "lib": [
             "esnext",
+            "DOM",
+            "DOM.Iterable"
         ],
+       
         // Allow javascript files to be compiled.
         "allowJs": false,
         // Report errors in .js files.
         // "checkJs": true,
 
         // Specify JSX code generation: 'preserve', 'react-native', or 'react'.
-        //"jsx": "react",
+        "jsx": "react",
 
         // Concatenate and emit output to single file.
         // "outFile": "./",
@@ -81,7 +84,7 @@
         // Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6).
         "moduleResolution": "node",
         // Base directory to resolve non-absolute module names.
-        // "baseUrl": "./",
+        //"baseUrl": "./",
 
         // A series of entries which re-map imports to lookup locations relative to the 'baseUrl'.
         // "paths": {},
@@ -92,7 +95,7 @@
         // List of folders to include type definitions from.
         "typeRoots": [
             "node_modules/@types",
-            "./services/delivery/src/types.ts"
+            "@types"
             // for custom type declarations
         ],
         // Type declaration files to be included in compilation.
@@ -126,7 +129,9 @@
         // Enables experimental support for emitting type metadata for decorators.
         "emitDecoratorMetadata": true,
         "paths": {
-            "*": ["./services/*"]
+            "components": ["./services/delivery-front/src/components"],
+            "utils": ["./services/delivery-front/src/utils"],
+            "pages": ["./services/delivery-front/src/pages"],
         },
     },
     "include": [
