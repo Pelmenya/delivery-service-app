@@ -1,5 +1,36 @@
 version: "3.9"
-services: 
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_ADMINUSERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_ADMINPASSWORD}
+      ME_CONFIG_MONGODB_URL: ${MONGODB_URL}
+  
+  delivery:
+    build: ./services/delivery
+    container_name: delivery
+    volumes:
+      - ./services/delivery:/app
+    ports:
+      - 8080:${PORT}
+    environment:      
+      - PORT=${PORT}
+      - NODE_ENV=dev
+    depends_on:
+      - mongo
+    working_dir: /app
+    command: sh -c "cd /app; npm install; npm run dev" 
 
   delivery-front:
     build: ./services/delivery-front
@@ -7,9 +38,12 @@ services:
     volumes:
       - ./services/delivery-front:/app
     ports:
-      - 8080:8080
+      - ${PORT_FRONT}:${PORT_FRONT}
     environment:      
-      - PORT=3000
-      - NODE_ENV=dev
+      - PORT=${PORT_FRONT}
+      - BACK_URL=http://delivery:${PORT}
+      - IS_DEV=true
+    depends_on:
+      - mongo
     working_dir: /app
     command: sh -c "cd /app; npm install; npm run dev"

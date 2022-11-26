@@ -1,5 +1,6 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -79,6 +80,10 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new EnvironmentPlugin([
+            'PORT', 
+            'BACK_URL'
+        ]),
         new CopyWebpackPlugin({
             patterns: [
                 {

@@ -1,10 +1,11 @@
 import React from 'react';
-import { SpareUI } from 'components/spare-ui/spare-ui';
+import { SpareUI } from '../../../components/spare-ui/spare-ui';
 
-import { Nullable } from 'utils/types/nullable';
+import { Nullable } from '../../../utils/types/nullable';
 
 interface ErrorBoundaryProps {
     error?: Error;
+    children?: Nullable<JSX.Element>;
 }
 
 interface ErrorBoundaryState {

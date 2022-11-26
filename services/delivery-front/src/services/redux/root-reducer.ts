@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { newsReducer } from './slices/news/news';
+import { advertisementsReducer } from './slices/advertisements/advertisements';
 
 export const rootReducer = combineReducers({
-    news: newsReducer,
+    advertisements: advertisementsReducer,
 });
