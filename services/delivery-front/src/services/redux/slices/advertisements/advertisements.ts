@@ -27,7 +27,9 @@ export const initialAdvertisementsState = {
 } as IAdvertisementsState;
 
 export const fetchAdvertisementsData = createAsyncThunk(
-    'advertisements/fetchAdvertisementsData', async () => await (await advertisementsAPI.getAdvertisements()).data as { articles: IAdvertisementData[] },
+    'advertisements/fetchAdvertisementsData', 
+    async () => await (await advertisementsAPI.getAdvertisements())
+        .data as IAdvertisementData[],
 );
 
 const advertisementsSlice = createSlice({
@@ -75,8 +77,8 @@ const advertisementsSlice = createSlice({
             state.error = undefined;
         });
         builder.addCase(fetchAdvertisementsData.fulfilled, (state, action) => {
-            state.advertisements = action.payload.articles;
-            state.maxSteps = Math.ceil(action.payload.articles.length / countOfBatch);
+            state.advertisements = action.payload;
+            state.maxSteps = Math.ceil(action.payload.length / countOfBatch);
             state.step += 1;
             state.loading = 'succeeded';
         });

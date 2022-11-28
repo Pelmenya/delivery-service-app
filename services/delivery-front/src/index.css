@@ -1,3 +1,5 @@
+@import url('./styles/fonts.css');
+
 body {
     margin: 0;
 }
@@ -17,12 +19,17 @@ body {
 }
 
 :root {
-    --main: #f9a600;
-    --secondary: #f3bd15;
-    --accent: #d14d30;
-    --black: #121210;
+    --light-blue: #8080ff;
+    --light-blue-two: #645faa;
+    --deep-blue: #100a63;
+    --deep-blue-two: #120c66;
+    --strawberry: #57236f;
+    --strawberry-light: #8d5d6e;
+    --rose: #fc3f56;
     --white: #fff;
-    --grey: #aaa9ad;
     --error: #d14d30;
-    --body-color: #e5eaf1;
+    --grey: #bebac4;
+    --grey-two: #b1adb7;
+    --black: #231f20;
+    --black-two: #2a2627;
 }

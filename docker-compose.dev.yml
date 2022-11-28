@@ -40,10 +40,9 @@ services:
     ports:
       - ${PORT_FRONT}:${PORT_FRONT}
     environment:      
-      - PORT=${PORT_FRONT}
-      - BACK_URL=http://delivery:${PORT}
+      - PORT_FRONT=${PORT_FRONT}
+      - BACK_URL=http://localhost:8080
       - IS_DEV=true
-    depends_on:
-      - mongo
     working_dir: /app
-    command: sh -c "cd /app; npm install; npm run dev"
+    command: sh -c "cd /app; npm install; npm run dev;"
+

@@ -1,3 +1,7 @@
 .h1 {
-    display: none;
+    font-family: 'GTEestiProMedium';
+}
+
+.h2 {
+    font-family: 'GTEestiProRegular';
 }

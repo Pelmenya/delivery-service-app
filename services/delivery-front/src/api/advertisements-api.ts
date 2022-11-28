@@ -1,13 +1,13 @@
 import axios from 'axios';
+import { ROUTES } from './routes';
 
+const { BACK_URL = 'http://localhost' } = process.env;
+const { API, ADVERTISEMENTS, ID } = ROUTES;
 export interface UserData {
     name: string;
     email: string;
     password: string;
 }
-
-const { BACK_URL } = process.env
-console.log(BACK_URL)
 
 class AdvertisementsAPI {
     server: string;
@@ -16,9 +16,10 @@ class AdvertisementsAPI {
         this.server = server;
     }
 
-    getAdvertisements = async () => axios.get(`${BACK_URL}/api/adverisements`);
+    getAdvertisements = async () => axios.get(`${this.server}${API}${ADVERTISEMENTS}`);
+
 }
 
 
 
-export const advertisementsAPI = new AdvertisementsAPI('');
+export const advertisementsAPI = new AdvertisementsAPI(BACK_URL);

@@ -10,8 +10,11 @@ import { methodOverride } from './middlewares/method-override';
 import { passportInitialize, passportSession } from './middlewares/passport';
 import { errors } from './middlewares/errors';
 import { expressSession } from './middlewares/express-session';
+import { cors } from './middlewares/cors';
 
 const app = express();
+
+app.use(cors);
 
 // body-parser
 app.use(express.json());

@@ -1,15 +1,21 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { EnvironmentPlugin } = require('webpack');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const app = path.join(__dirname, 'src', 'index.tsx')
 
 module.exports = {
     mode: 'development',
     devtool: 'source-map', // generate source map
-    entry: {
-        app: path.join(__dirname, 'src', 'index.tsx'),
+    entry: [
+        `${path.join(__dirname, 'src', 'index.tsx')}`
+    ],
+    watchOptions: { // без этого не успевает в Docker Hot Module Reload!!!
+        aggregateTimeout: 300,
+        poll: 1000
     },
     target: 'web',
     resolve: {
@@ -80,8 +86,8 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new ReactRefreshWebpackPlugin(), // Нужно для React, уже включает в себя HRM
         new EnvironmentPlugin([
-            'PORT', 
             'BACK_URL'
         ]),
         new CopyWebpackPlugin({
@@ -99,5 +105,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/style.[fullhash].css',
         }),
+        
     ],
 };

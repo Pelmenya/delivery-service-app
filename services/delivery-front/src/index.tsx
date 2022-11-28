@@ -12,8 +12,6 @@ import './index.css';
 import { store } from './services/redux/store';
 import { App } from './components/app/app';
 
-console.log(process.env.NODE_ENV);
-
 const Root = () => (
     <ReduxProvider store={store}>
         <Router>
@@ -22,4 +20,4 @@ const Root = () => (
     </ReduxProvider>
 );
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<Root />);
+ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement).render(<Root />);

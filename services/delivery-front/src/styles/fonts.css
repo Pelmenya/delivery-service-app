@@ -1,30 +1,24 @@
 @font-face {
-    font-family: 'Play';
-    src: url('./fonts/Play-Bold.eot');
-    src: local('Play-Bold'),
-        url('./fonts/Play-Bold.eot?#iefix')
-        format('embedded-opentype'),
-        url('./fonts/Play-Bold.woff') format('woff'),
-        url('./fonts/Play-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Play';
-    src: url('./fonts/Play.eot');
-    src: local('Play'),
-        url('./fonts/Play.eot?#iefix')
-        format('embedded-opentype'),
-        url('./fonts/Play.woff') format('woff'),
-        url('./fonts/Play.ttf') format('truetype');
+    font-family: "GTEestiProRegular";
+    src: url("./fonts/GTEestiProDisplay-Regular.eot");
+    src: local("GT Eesti Pro Text Regular"), local("GTEestiProText-Regular"),
+        url("./fonts/GTEestiProDisplay-Regular.eot?#iefix")
+            format("embedded-opentype"),
+        url("./fonts/GTEestiProDisplay-Regular.woff2") format("woff2"),
+        url("./fonts/GTEestiProDisplay-Regular.woff") format("woff"),
+        url("./fonts/GTEestiProDisplay-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Press Start 2P';
-    src: url('./fonts/PressStart2P.ttf') format('truetype');
-    font-weight: normal;
+    font-family: "GTEestiProMedium";
+    src: url("./fonts/GTEestiProText-Medium.eot");
+    src: local("GT Eesti Pro Text Medium"), local("GTEestiProText-Medium"),
+        url("./fonts/GTEestiProText-Medium.eot?#iefix") format("embedded-opentype"),
+        url("./fonts/GTEestiProText-Medium.woff2") format("woff2"),
+        url("./fonts/GTEestiProText-Medium.woff") format("woff"),
+        url("./fonts/GTEestiProText-Medium.ttf") format("truetype");
+    font-weight: 500;
     font-style: normal;
 }
