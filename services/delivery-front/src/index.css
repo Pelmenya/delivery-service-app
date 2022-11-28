@@ -1,0 +1,35 @@
+@import url('./styles/fonts.css');
+
+body {
+    margin: 0;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+}
+  
+*::-webkit-scrollbar-track {
+    background: #e5eaf1;
+    border-radius: 4px;
+}
+  
+*::-webkit-scrollbar-thumb {
+    background: #1976d2;
+    border-radius: 4px;
+}
+
+:root {
+    --light-blue: #8080ff;
+    --light-blue-two: #645faa;
+    --deep-blue: #100a63;
+    --deep-blue-two: #120c66;
+    --strawberry: #57236f;
+    --strawberry-light: #8d5d6e;
+    --rose: #fc3f56;
+    --white: #fff;
+    --error: #d14d30;
+    --grey: #bebac4;
+    --grey-two: #b1adb7;
+    --black: #231f20;
+    --black-two: #2a2627;
+}

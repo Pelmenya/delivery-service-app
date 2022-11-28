@@ -1,0 +1,5 @@
+{
+    "watch": ["./**/*"],
+    "ext": "ts, tsx, jsx, css",
+    "exec": "node webpack-dev-server.js"
+  }
