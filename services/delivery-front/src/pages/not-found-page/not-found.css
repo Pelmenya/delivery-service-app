@@ -3,7 +3,7 @@
     margin-top: 80px;
     display: flex;
     flex-direction: column;
-    background-image: url("images/not-found.svg");
+    background-image: url("../../../static/images/not-found.svg");
     width: 600px;
     height: 600px;
     background-size: cover;

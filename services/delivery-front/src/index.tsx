@@ -8,6 +8,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+import './styles/fonts.css';
 import './index.css';
 import { store } from './services/redux/store';
 import { App } from './components/app/app';
